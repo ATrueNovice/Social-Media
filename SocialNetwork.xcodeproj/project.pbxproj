@@ -14,6 +14,8 @@
 		D5CD4B571ED26AD60019E85B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5CD4B561ED26AD60019E85B /* Assets.xcassets */; };
 		D5CD4B5A1ED26AD60019E85B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5CD4B581ED26AD60019E85B /* LaunchScreen.storyboard */; };
 		D5CD4B621ED26B9A0019E85B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D5CD4B611ED26B9A0019E85B /* GoogleService-Info.plist */; };
+		D5CD4B671ED2FED00019E85B /* FBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD4B661ED2FED00019E85B /* FBView.swift */; };
+		D5CD4B6A1ED2FF610019E85B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD4B691ED2FF610019E85B /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		D5CD4B591ED26AD60019E85B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5CD4B5B1ED26AD60019E85B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5CD4B611ED26B9A0019E85B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D5CD4B661ED2FED00019E85B /* FBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBView.swift; sourceTree = "<group>"; };
+		D5CD4B691ED2FF610019E85B /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 		D5CD4B4E1ED26AD60019E85B /* SocialNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				D5CD4B681ED2FF520019E85B /* Utilities */,
 				D5CD4B651ED26E310019E85B /* Controller */,
 				D5CD4B641ED26E2C0019E85B /* View */,
 				D5CD4B631ED26E270019E85B /* Model */,
@@ -94,6 +99,7 @@
 		D5CD4B641ED26E2C0019E85B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D5CD4B661ED2FED00019E85B /* FBView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -104,6 +110,14 @@
 				D5CD4B511ED26AD60019E85B /* SignInVC.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		D5CD4B681ED2FF520019E85B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D5CD4B691ED2FF610019E85B /* Constants.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		D5CDBCB4305A0BC66447F41A /* Pods */ = {
@@ -240,8 +254,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5CD4B6A1ED2FF610019E85B /* Constants.swift in Sources */,
 				D5CD4B521ED26AD60019E85B /* SignInVC.swift in Sources */,
 				D5CD4B501ED26AD60019E85B /* AppDelegate.swift in Sources */,
+				D5CD4B671ED2FED00019E85B /* FBView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
