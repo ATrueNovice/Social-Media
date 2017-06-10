@@ -14,6 +14,7 @@ target 'SocialNetwork' do
 	pod ‘FacebookLogin’
 	pod ‘FacebookShare’
 	pod ‘FBSDKLoginKit’
+    pod 'SwiftKeychainWrapper'
     
 
  
