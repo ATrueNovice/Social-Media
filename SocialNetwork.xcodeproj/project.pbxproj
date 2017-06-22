@@ -11,6 +11,7 @@
 		D529D7811EF777B20091210E /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D529D7801EF777B20091210E /* CircleView.swift */; };
 		D529D7831EF782940091210E /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D529D7821EF782940091210E /* PostCell.swift */; };
 		D529D7861EFB2B880091210E /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D529D7851EFB2B880091210E /* DataServices.swift */; };
+		D529D7881EFC50300091210E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D529D7871EFC50300091210E /* Post.swift */; };
 		D5C0B26B1EE1FC6900D73842 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C0B26A1EE1FC6900D73842 /* FeedVC.swift */; };
 		D5CD4B501ED26AD60019E85B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD4B4F1ED26AD60019E85B /* AppDelegate.swift */; };
 		D5CD4B521ED26AD60019E85B /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD4B511ED26AD60019E85B /* SignInVC.swift */; };
@@ -32,6 +33,7 @@
 		D529D7801EF777B20091210E /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		D529D7821EF782940091210E /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		D529D7851EFB2B880091210E /* DataServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
+		D529D7871EFC50300091210E /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D5C0B26A1EE1FC6900D73842 /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		D5CD4B4C1ED26AD60019E85B /* SocialNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5CD4B4F1ED26AD60019E85B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		D5CD4B631ED26E270019E85B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D529D7871EFC50300091210E /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				D529D7811EF777B20091210E /* CircleView.swift in Sources */,
 				D5CD4B6A1ED2FF610019E85B /* Constants.swift in Sources */,
 				D5CD4B6C1ED38B4F0019E85B /* RoundButton.swift in Sources */,
+				D529D7881EFC50300091210E /* Post.swift in Sources */,
 				D5CD4B521ED26AD60019E85B /* SignInVC.swift in Sources */,
 				D5CD4B501ED26AD60019E85B /* AppDelegate.swift in Sources */,
 				D529D7861EFB2B880091210E /* DataServices.swift in Sources */,

@@ -23,7 +23,7 @@ class Dataservice {
 
     private var _REF_BASE = DB_BASE
 
-    private var _REF_POSTS = DB_BASE.child("post")
+    private var _REF_POSTS = DB_BASE.child("posts")
     private var _REF_USERS = DB_BASE.child("users")
     //These two make a reference to the link to the actual database (DB_Base) and then the name of the array, in the parenthesis, to start with.
 
