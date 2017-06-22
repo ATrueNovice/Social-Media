@@ -6,6 +6,8 @@
 //  Copyright © 2017 HSI. All rights reserved.
 //
 
+//This code allows us to put posts, users, and content into a data base that will allow us to retreive later.
+
 //Here we are creating a singleton class that can be referenced by any view controller.
 
 import Foundation

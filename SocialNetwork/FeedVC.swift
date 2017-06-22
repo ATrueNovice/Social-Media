@@ -19,6 +19,13 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
         tableView.delegate = self
         tableView.dataSource = self
+
+        //This code listens to hear if anything has changed. We put it in the View did load to make sure that the view updates when something changes.
+
+        Dataservice.ds.REF_POSTS.observe(.value, with: { (snapshot) in
+            print(snapshot.value as Any?)
+        })
+
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
