@@ -11,17 +11,24 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var imageAdd: CircleView!
+
 
     var posts = [Post]()
+    var imagePicker = UIImagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
+
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
 
         //This code listens to hear if anything has changed. We put it in the View did load to make sure that the view updates when something changes.
 
@@ -63,8 +70,23 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             return PostCell()
     }
+
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+            if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+                imageAdd.image = image
+            } else {
+                print("NOTE: A Vaild Image Was Not Selected!")
+
+            }
+            imagePicker.dismiss(animated: true, completion: nil)
+        }
     }
     
+
+
+    @IBAction func addImageTapped(_ sender: Any) {
+        present(imagePicker, animated: true, completion: nil)
+    }
 
 
     @IBAction func buttonPressed(_ sender: Any) {
