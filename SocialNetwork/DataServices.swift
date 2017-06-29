@@ -17,9 +17,14 @@ import Firebase
 let DB_BASE = FIRDatabase.database().reference()
 //This code gets the database from the Google service Plist. This houses the URL to the firebase file.
 
+let STORAGE_BASE = FIRStorage.storage().reference()
+//Tells the app where to pull data from.
+
 class Dataservice {
 
     static let ds = Dataservice()
+
+    //DB References
 
     private var _REF_BASE = DB_BASE
 
@@ -27,6 +32,10 @@ class Dataservice {
     private var _REF_USERS = DB_BASE.child("users")
     //These two make a reference to the link to the actual database (DB_Base) and then the name of the array, in the parenthesis, to start with.
 
+
+    //Storage References
+
+    private var _REF_POST_IMAGES = STORAGE_BASE.child("post-pics")
     var REF_BASE: FIRDatabaseReference {
         return _REF_BASE
     }
@@ -37,6 +46,10 @@ class Dataservice {
 
     var REF_USERS: FIRDatabaseReference {
         return _REF_USERS
+    }
+
+    var REF_POST_IMAGES: FIRStorageReference {
+        return _REF_POST_IMAGES
     }
 
 
