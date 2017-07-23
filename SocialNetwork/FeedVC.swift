@@ -15,11 +15,13 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var imageAdd: CircleView!
+    @IBOutlet weak var captionField: FancyText!
 
 
     var posts = [Post]()
     var imagePicker = UIImagePickerController()
     static var imageCache: NSCache <NSString, UIImage> = NSCache()
+    var imageSelected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,9 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         //This code listens to hear if anything has changed. We put it in the View did load to make sure that the view updates when something changes.
 
         Dataservice.ds.REF_POSTS.observe(.value, with: { (snapshot) in
+
+            self.posts = [] //Clear out the arrray everytime.
+
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for snap in snapshot {
                     print("SNAP: \(snap)")
@@ -78,17 +83,19 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         } else {
             return PostCell()
     }
+}
 
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
             if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
                 imageAdd.image = image
+                imageSelected = true
             } else {
                 print("NOTE: A Vaild Image Was Not Selected!")
 
             }
             imagePicker.dismiss(animated: true, completion: nil)
         }
-    }
+
     
 
 
@@ -96,6 +103,65 @@ class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIIm
         present(imagePicker, animated: true, completion: nil)
     }
 
+    @IBAction func postBtnTapped(_ sender: Any) {
+        guard let caption = captionField.text, caption != "" else {
+            print("Note: Caption Must Be Entered")
+            return
+        }
+
+        guard let img = imageAdd.image, imageSelected == true else {
+
+            print("NOTE: An Image Must Be Selected")
+            return
+        }
+
+        if let imgData = UIImageJPEGRepresentation(img, 0.2) {
+
+            //Fill in explanation
+            let imgUid = NSUUID().uuidString
+            let metadata = FIRStorageMetadata()
+            metadata.contentType = "image/jpeg"
+            Dataservice.ds.REF_POST_IMAGES.child(imgUid).put(imgData, metadata: metadata) { (metadata, error) in
+
+                if error != nil {
+                    print("NOTE: Unable to upload image to Firebase")
+                } else {
+                    print("NOTE: Successfully uploaded Image to Firebase")
+
+                    let downloadURL = metadata?.downloadURL()?.absoluteString
+
+                    if let url = downloadURL {
+
+                    self.postToFirebase(imgUrl: url)
+                    }
+                }
+
+            }
+        }
+    }
+
+    //This posts data to firebase. Match the wording correctly!!!
+    func postToFirebase(imgUrl: String) {
+        let post: Dictionary<String, AnyObject> = [
+            "caption": captionField.text! as AnyObject,
+            "imageUrl": imgUrl as AnyObject,
+            "likes": 0 as AnyObject
+        ]
+
+        //Sends post to firebase and creates an id automatically for the post.
+        let firebasePost = Dataservice.ds.REF_POSTS.childByAutoId()
+        firebasePost.setValue(post)
+
+        //This code resets the value of the caption field to empty, image selected to none and, removes the selected image to set it back to the stock image.
+
+        captionField.text = ""
+        imageSelected = false
+        imageAdd.image = UIImage(named: "add-image")
+
+
+        //Sets table to the new value!
+        tableView.reloadData()
+    }
 
     @IBAction func buttonPressed(_ sender: Any) {
 
