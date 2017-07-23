@@ -17,12 +17,25 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var postImg: UIImageView!
     @IBOutlet weak var caption: UITextView!
     @IBOutlet weak var likesLbl: UILabel!
+    @IBOutlet weak var likeImg: UIImageView!
+
 
 
     var post: Post!
 
+    var likesRef: FIRDatabaseReference!
+
+
     override func awakeFromNib() {
         super.awakeFromNib()
+
+        //This is a gesture recognizer written programatically. This allows users to tap the heart to show that they liked it. It is done like this because any repetition in MainStoryboard Tap Gestures break with repetition.
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(likeTapped))
+        tap.numberOfTapsRequired = 1
+        likeImg.addGestureRecognizer(tap)
+        likeImg.isUserInteractionEnabled = true
+
     }
 
 
@@ -30,6 +43,7 @@ class PostCell: UITableViewCell {
     
     func configureCell(post: Post, img: UIImage? = nil) {
         self.post = post
+        likesRef = Dataservice.ds.REF_USER_CURRENT.child("likes").child(post.postkey)
         self.caption.text = post.caption
         self.likesLbl.text = "\(post.likes)"
 
@@ -57,7 +71,39 @@ class PostCell: UITableViewCell {
 
                 })
             }
+
+
+
+        likesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let _ = snapshot.value as? NSNull {
+                self.likeImg.image = UIImage(named: "empty-heart")
+            } else {
+                self.likeImg.image = UIImage(named: "filled-heart")
+            }
+        })
+    }
+
+        func likeTapped(sender: UITapGestureRecognizer) {
+            //Sends likes to Firebase and then ObserveSingle Event listens for any changes.
+
+            likesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+
+                //Since we are working with JSON it is NSNUll not "nill"
+                if let _  = snapshot.value as? NSNull {
+
+                    //Since no one has liked the post, we use the default name of the image. NOTE there are two different images. Empty and full heart. This image changes depending on if the item is liked or not.
+
+                    self.likeImg.image = UIImage(named: "filled-heart")
+                    self.post.adjustLikes(addLike: true)
+                    self.likesRef.setValue(true) //Adds another value to the user DB in firebase, linking the like to the user.
+                } else {
+                    self.likeImg.image = UIImage(named: "empty-heart")
+                    self.post.adjustLikes(addLike: false)
+                    self.likesRef.removeValue()
+                }
+            })
+
+
         }
-        
 
     }

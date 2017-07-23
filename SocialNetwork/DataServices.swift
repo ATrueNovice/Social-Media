@@ -12,7 +12,7 @@
 
 import Foundation
 import Firebase
-
+import SwiftKeychainWrapper
 
 let DB_BASE = FIRDatabase.database().reference()
 //This code gets the database from the Google service Plist. This houses the URL to the firebase file.
@@ -30,6 +30,8 @@ class Dataservice {
 
     private var _REF_POSTS = DB_BASE.child("posts")
     private var _REF_USERS = DB_BASE.child("users")
+
+
     //These two make a reference to the link to the actual database (DB_Base) and then the name of the array, in the parenthesis, to start with.
 
 
@@ -52,9 +54,15 @@ class Dataservice {
         return _REF_POST_IMAGES
     }
 
+    var REF_USER_CURRENT: FIRDatabaseReference{
+        let  uid = KeychainWrapper.standard.string(forKey: KEY_UID)
+        let user = REF_USERS.child(uid!)
+        return user
+    }
+
 
     func createFirebaseDBUser(uid: String, userData: Dictionary<String, String>) {
-        //This function creates a new user based on the parameters uid & userdata to build out the array. Thats why we put userData as a dictionary. To add likes, photos, and other information based on the array in the data base. 
+        //This function creates a new user based on the parameters uid & userdata to build out the array. Thats why we put userData as a dictionary. To add likes, photos, and other information based on the array in the data base.
         
         REF_USERS.child(uid).updateChildValues(userData)
 
